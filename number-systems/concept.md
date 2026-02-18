@@ -1,171 +1,226 @@
-# Number Systems & Binary Arithmetic
+# Number Systems and Binary Arithmetic
 
 ---
 
 ## 1. Number Systems
 
-### Binary (Base 2)
-Digits: `0, 1`  
+### 1.1 Binary (Base 2)
+
+Digits: $0, 1$
+
 Weights:
-$begin:math:display$
-2\^n
-$end:math:display$
+$$
+2^n
+$$
 
 Example:
-$begin:math:display$
-\(1011\)\_2 \= 1\\cdot2\^3 \+ 0\\cdot2\^2 \+ 1\\cdot2\^1 \+ 1\\cdot2\^0 \= 11\_\{10\}
-$end:math:display$
+$$
+(1011)_2 = 1\cdot2^3 + 0\cdot2^2 + 1\cdot2^1 + 1\cdot2^0 = 11_{10}
+$$
 
 ---
 
-### Octal (Base 8)
-Digits: `0–7`  
-Weights:
-$begin:math:display$
-8\^n
-$end:math:display$
+### 1.2 Octal (Base 8)
 
-Binary → Octal: group bits in 3s.
+Digits: $0$–$7$
+
+Weights:
+$$
+8^n
+$$
+
+Binary to Octal: group bits in 3.
+
+Example:
+$$
+(110101)_2 = (65)_8
+$$
 
 ---
 
-### Hexadecimal (Base 16)
-Digits: `0–9, A–F`  
-Weights:
-$begin:math:display$
-16\^n
-$end:math:display$
+### 1.3 Hexadecimal (Base 16)
 
-Binary → Hex: group bits in 4s.
+Digits: $0$–$9$, $A$–$F$
+
+Weights:
+$$
+16^n
+$$
+
+Binary to Hex: group bits in 4.
+
+Example:
+$$
+(11111010)_2 = (FA)_{16}
+$$
 
 ---
 
 ## 2. Binary Arithmetic
 
-### Addition Rules
-$begin:math:display$
-0\+0\=0
-$end:math:display$
-$begin:math:display$
-0\+1\=1
-$end:math:display$
-$begin:math:display$
-1\+1\=10
-$end:math:display$
-$begin:math:display$
-1\+1\+1\=11
-$end:math:display$
+### 2.1 Addition Rules
+
+$$
+0+0=0
+$$
+$$
+0+1=1
+$$
+$$
+1+1=10
+$$
+$$
+1+1+1=11
+$$
+
+Example:
+$$
+\begin{aligned}
+  &1011 \\
++ &0110 \\
+\hline
+  &10001
+\end{aligned}
+$$
 
 ---
 
-### Subtraction Rule
-$begin:math:display$
-0\-1 \\Rightarrow \\text\{borrow\}
-$end:math:display$
+### 2.2 Subtraction
+
+If:
+$$
+0 - 1
+$$
+borrow from higher bit.
 
 ---
 
-## 3. 2’s Complement (Signed Integers)
+## 3. Two's Complement Representation
 
-### Sign Bit
-- MSB = 0 → positive  
-- MSB = 1 → negative  
+### 3.1 Sign Bit
+
+For an $n$-bit number:
+
+- MSB $= 0$ → positive  
+- MSB $= 1$ → negative  
 
 ---
 
-### Ranges (n bits)
+### 3.2 Ranges
 
 Unsigned:
-$begin:math:display$
-0 \\to 2\^n \- 1
-$end:math:display$
+$$
+0 \le x \le 2^n - 1
+$$
 
-Signed:
-$begin:math:display$
-\[\-2\^\{n\-1\}\,\\\; 2\^\{n\-1\}\-1\]
-$end:math:display$
+Signed (two's complement):
+$$
+-2^{n-1} \le x \le 2^{n-1}-1
+$$
+
+Example (8-bit):
+$$
+[-128, 127]
+$$
 
 ---
 
-### Negative Number
+### 3.3 Forming a Negative Number
 
-To compute $begin:math:text$\-B$end:math:text$:
+To compute $-B$:
 
 1. Invert bits  
 2. Add 1  
 
-$begin:math:display$
-\-B \= 2\^n \- B
-$end:math:display$
+Equivalent expression:
+$$
+-B = 2^n - B
+$$
 
 ---
 
-## 4. Subtraction Using 2’s Complement
+## 4. Subtraction Using Two's Complement
 
-$begin:math:display$
-A \- B \= A \+ \(\-B\)
-$end:math:display$
+Instead of:
+$$
+A - B
+$$
+
+Compute:
+$$
+A + (-B)
+$$
 
 Since:
-$begin:math:display$
-\-B \= 2\^n \- B
-$end:math:display$
+$$
+-B = 2^n - B
+$$
 
-Arithmetic is performed:
-$begin:math:display$
-\\text\{mod \} 2\^n
-$end:math:display$
+Therefore:
+$$
+A - B = A + (2^n - B)
+$$
+
+All arithmetic is performed:
+$$
+\text{mod } 2^n
+$$
 
 ---
 
 ## 5. Modular Arithmetic
 
-Computers store values:
-$begin:math:display$
-0 \\to 2\^n \- 1
-$end:math:display$
+Computers store integers:
+$$
+0 \le x \le 2^n - 1
+$$
 
-Clock analogy:
-$begin:math:display$
-n \\equiv 0 \\pmod\{n\}
-$end:math:display$
+Arithmetic is performed:
+$$
+\text{mod } 2^n
+$$
 
-Example:
-$begin:math:display$
-18 \\equiv 6 \\pmod\{12\}
-$end:math:display$
+Clock analogy (mod $12$):
+$$
+18 \equiv 6 \pmod{12}
+$$
+
+Because:
+$$
+18 = 12 + 6
+$$
+
+Thus:
+$$
+12 \equiv 0 \pmod{12}
+$$
 
 ---
 
 ## 6. Overflow
 
-Occurs when result exceeds signed range.
+Overflow occurs when the result exceeds representable signed range.
 
-Detection (2’s complement):
-- Same sign inputs  
-- Different sign output  
+For two's complement addition:
 
-Or:
-$begin:math:display$
-\\text\{Carry into MSB\} \\ne \\text\{Carry out of MSB\}
-$end:math:display$
+Overflow if:
+$$
+\text{Carry into MSB} \ne \text{Carry out of MSB}
+$$
 
----
+Or equivalently:
 
-## Key Formulas
+- Same sign operands  
+- Different sign result  
 
-$begin:math:display$
-\\text\{Unsigned range\} \= 0 \\to 2\^n \- 1
-$end:math:display$
+Example (4-bit):
+$$
+7 + 3 = 1010_2
+$$
 
-$begin:math:display$
-\\text\{Signed range\} \= \[\-2\^\{n\-1\}\, 2\^\{n\-1\}\-1\]
-$end:math:display$
+But signed range:
+$$
+[-8,7]
+$$
 
-$begin:math:display$
-A \- B \= A \+ \(2\^n \- B\)
-$end:math:display$
-
-$begin:math:display$
-\\text\{Storage\} \= \\text\{mod \} 2\^n
-$end:math:display$
+Thus overflow occurs.
