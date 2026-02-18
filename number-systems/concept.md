@@ -9,9 +9,7 @@
 Digits: $0, 1$
 
 Weights:
-$$
-2^n
-$$
+$ 2^n $
 
 Example:
 $$
@@ -25,9 +23,7 @@ $$
 Digits: $0$–$7$
 
 Weights:
-$$
-8^n
-$$
+$ 8^n $
 
 Binary to Octal: group bits in 3.
 
