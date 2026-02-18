@@ -5,16 +5,15 @@
 ## 1. Number Systems
 
 ### 1.1 Binary (Base 2)
-**Digits:** $0, 1$  
+**Digits:** 0, 1  
 **Weights:** $2^n$
 
-**Example:**
-$$(1011)_2 = 1 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = 11_{10}$$
+**Example:** $$(1011)_2 = 1 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = 11_{10}$$
 
 ---
 
 ### 1.2 Octal (Base 8)
-**Digits:** $0-7$  
+**Digits:** 0–7  
 **Weights:** $8^n$
 
 **Binary to Octal:** Group bits in 3s.  
@@ -23,7 +22,7 @@ $$(1011)_2 = 1 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = 11_{10}$$
 ---
 
 ### 1.3 Hexadecimal (Base 16)
-**Digits:** $0-9, A-F$  
+**Digits:** 0–9, A–F  
 **Weights:** $16^n$
 
 **Binary to Hex:** Group bits in 4s.  
@@ -34,10 +33,10 @@ $$(1011)_2 = 1 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = 11_{10}$$
 ## 2. Binary Arithmetic
 
 ### 2.1 Addition Rules
-* $0 + 0 = 0$
-* $0 + 1 = 1$
-* $1 + 1 = 10$
-* $1 + 1 + 1 = 11$
+* $0+0=0$
+* $0+1=1$
+* $1+1=10$
+* $1+1+1=11$
 
 **Example:**
 $$
@@ -49,18 +48,19 @@ $$
 \end{aligned}
 $$
 
+
 ---
 
 ### 2.2 Subtraction
-If $0 - 1$, borrow $1$ from the higher bit.
+If $0 - 1$, borrow 1 from the higher bit.
 
 ---
 
 ## 3. Two's Complement Representation
 
 ### 3.1 Sign Bit (n-bit system)
-* **MSB = 0:** Positive  
-* **MSB = 1:** Negative  
+* **MSB = 0** → Positive  
+* **MSB = 1** → Negative  
 
 ---
 
@@ -99,10 +99,10 @@ Since $12 \equiv 0 \pmod{12}$, the number "wraps" once capacity is reached.
 ---
 
 ## 6. Overflow
-Overflow occurs when the mathematical result exceeds the representable signed range, causing the value to "wrap" into an incorrect sign.
+Overflow occurs when the result exceeds the representable signed range, causing the value to "wrap" into an incorrect sign.
 
 **Detection Rules:**
-1. **Hardware:** $\text{Carry-in to MSB} \neq \text{Carry-out of MSB}$.
+1. **Hardware:** $\text{Carry-in to MSB} \neq \text{Carry-out of MSB}$
 2. **Logic:** Two operands of the same sign produce a result with a different sign.
 
 
