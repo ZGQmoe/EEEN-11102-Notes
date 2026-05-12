@@ -39,7 +39,7 @@ Built using **NAND gates**.
 ## 1.4 SR Latch with Control Input
 Synchronization is added by a control input ($C$) that determines when the $S$ and $R$ inputs are allowed to affect the state.
 
-![SR Latch with Control Input](images/src_latch.png)
+![SR Latch with Control Input](../images/src_latch.png)
 
 #### 1.4.1 Function Table
 | C | S | R | Next state of $Q$ |
@@ -60,7 +60,7 @@ When $C=1$ and $S=R=1$, the internal latch stage receives a $(0,0)$ signal, forc
 ## 1.5 D Latch
 The D Latch eliminates the undefined state found in the SR latch by ensuring inputs are always complements.
 
-![D Latch Logic Diagram](images/d_latch.png)
+![D Latch Logic Diagram](../images/d_latch.png)
 
 #### 1.5.1 Function Table
 | C | D | Next state of $Q$ |
@@ -77,7 +77,7 @@ Flip-flops change state only at the specific instant of a clock transition (edge
 #### 1.6.1 Master-Slave D Flip-Flop
 Constructed by connecting two D-latches in series with an inverted clock signal.
 
-![Master-Slave D Flip-Flop](images/p_trig_flp.png)
+![Master-Slave D Flip-Flop](../images/p_trig_flp.png)
 
 * **Master Latch**: Receives external $D$. It is **"Open" (Transparent)** when $CLK=0$ ($Q_{master}$ follows $D$).
 * **Slave Latch**: Receives Master output. It is **"Closed" (Latched)** when $CLK=0$, holding $Q_{final}$.
@@ -89,7 +89,7 @@ Constructed by connecting two D-latches in series with an inverted clock signal.
 #### 1.6.2 Edge-Triggered Symbols and Logic
 The dynamic indicator (triangle) denotes response to a clock edge.
 
-![Graphic Symbols for D Flip-Flops](images/edge_flp_symbol.png)
+![Graphic Symbols for D Flip-Flops](../images/edge_flp_symbol.png)
 
 * **Positive-Edge**: Represented by a small triangle ($\Delta$) at the clock input.
 * **Negative-Edge**: Represented by a bubble and a triangle.
