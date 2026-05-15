@@ -1,242 +1,535 @@
-## 1. Logic Gates
+# Number Systems and Binary Arithmetic
+
+This file contains only core concepts, rules, and formulas.
+
+For worked examples and detailed explanations, see:
+
+➡️ [Number Systems Examples](./examples.md)
 
 ---
 
-### 1.1 Fundamental Logic Gates
+## 1. Number Systems
 
-#### 1.1.1 NOT Gate (Inverter)
-* **Function:** Inverts input ($Y = \bar{A}$).
-* **Truth Table:**
+### 1.1 Binary (Base 2)
 
-| $A$ | $Y$ |
-| :--- | :--- |
-| 0 | 1 |
-| 1 | 0 |
+**Digits:** `0, 1`
 
+**Base:** 2
 
+**Weights:**
 
-[Image of NOT gate symbol and truth table]
+```math
+2^n
+```
 
+A binary number is weighted by powers of 2:
 
----
+```math
+(b_n b_{n-1}\dots b_1 b_0)_2
+=
+b_n2^n+b_{n-1}2^{n-1}+\dots+b_1 2^1+b_0 2^0
+```
 
-#### 1.1.2 AND Gate
-* **Function:** $Y=1$ only if all inputs are 1 ($Y = A \cdot B$).
-* **Truth Table:**
-
-| $A$ | $B$ | $Y$ |
-| :--- | :--- | :--- |
-| 0 | 0 | 0 |
-| 0 | 1 | 0 |
-| 1 | 0 | 0 |
-| 1 | 1 | 1 |
-
-
-
-[Image of AND gate symbol and truth table]
-
+📘 Example: [Binary positional weight example](./examples.md#11-binary-positional-weight-example)
 
 ---
 
-#### 1.1.3 OR Gate
-* **Function:** $Y=1$ if at least one input is 1 ($Y = A + B$).
-* **Truth Table:**
+### 1.2 Octal (Base 8)
 
-| $A$ | $B$ | $Y$ |
-| :--- | :--- | :--- |
-| 0 | 0 | 0 |
-| 0 | 1 | 1 |
-| 1 | 0 | 1 |
-| 1 | 1 | 1 |
+**Digits:** `0–7`
 
+**Base:** 8
 
+**Weights:**
 
-[Image of OR gate symbol and truth table]
+```math
+8^n
+```
 
+Binary to octal conversion:
 
----
+> Group binary bits in groups of 3 from the right.
 
-### 1.2 Universal Gates
-
-#### 1.2.1 NAND Gate
-* **Function:** $Y=0$ only if all inputs are 1 ($Y = \overline{A \cdot B}$).
-* **Truth Table:**
-
-| $A$ | $B$ | $Y$ |
-| :--- | :--- | :--- |
-| 0 | 0 | 1 |
-| 0 | 1 | 1 |
-| 1 | 0 | 1 |
-| 1 | 1 | 0 |
-
-
-
-[Image of NAND gate symbol and truth table]
-
+📘 Example: [Binary to octal example](./examples.md#12-binary-to-octal-example)
 
 ---
 
-#### 1.2.2 NOR Gate
-* **Function:** $Y=1$ only if all inputs are 0 ($Y = \overline{A + B}$).
-* **Truth Table:**
+### 1.3 Hexadecimal (Base 16)
 
-| $A$ | $B$ | $Y$ |
-| :--- | :--- | :--- |
-| 0 | 0 | 1 |
-| 0 | 1 | 0 |
-| 1 | 0 | 0 |
-| 1 | 1 | 0 |
+**Digits:** `0–9, A–F`
 
+**Base:** 16
 
+**Weights:**
 
-[Image of NOR gate symbol and truth table]
+```math
+16^n
+```
 
+Hexadecimal digit values:
 
----
+| Hex | Decimal |
+|---:|---:|
+| A | 10 |
+| B | 11 |
+| C | 12 |
+| D | 13 |
+| E | 14 |
+| F | 15 |
 
-### 1.3 Exclusive Gates
+Binary to hexadecimal conversion:
 
-#### 1.3.1 XOR (Exclusive-OR)
-* **Function:** $Y=1$ if inputs are different ($Y = A \oplus B$).
-* **Truth Table:**
+> Group binary bits in groups of 4 from the right.
 
-| $A$ | $B$ | $Y$ |
-| :--- | :--- | :--- |
-| 0 | 0 | 0 |
-| 0 | 1 | 1 |
-| 1 | 0 | 1 |
-| 1 | 1 | 0 |
-
-
-
-[Image of XOR gate symbol and truth table]
-
+📘 Example: [Binary to hexadecimal example](./examples.md#13-binary-to-hexadecimal-example)
 
 ---
 
-#### 1.3.2 XNOR (Exclusive-NOR)
-* **Function:** $Y=1$ if inputs are the same ($Y = \overline{A \oplus B}$).
-* **Truth Table:**
+### 1.4 Binary Prefixes
 
-| $A$ | $B$ | $Y$ |
-| :--- | :--- | :--- |
-| 0 | 0 | 1 |
-| 0 | 1 | 0 |
-| 1 | 0 | 0 |
-| 1 | 1 | 1 |
+In hardware design, binary prefixes often represent powers of:
 
+```math
+2^{10}=1024
+```
 
+| Prefix | Symbol | Binary Power | Decimal Approx. | Exact Value |
+| :--- | :--- | :--- | :--- | :--- |
+| Kilo | K | `2^10` | `10^3` | `1,024` |
+| Mega | M | `2^20` | `10^6` | `1,048,576` |
+| Giga | G | `2^30` | `10^9` | `1,073,741,824` |
+| Tera | T | `2^40` | `10^12` | `1,099,511,627,776` |
 
-[Image of XNOR gate symbol and truth table]
+Useful identity:
 
+```math
+2^{20}=10^6+d
+```
 
----
+where:
 
-## 2. Boolean Algebra
+```math
+d=48,576
+```
 
-### 2.1 Basic Identities
+Then:
 
-| No. | Identity (OR Form) | Identity (AND Form) | Description |
-| :--- | :--- | :--- | :--- |
-| 2.1.1 | $X + 0 = X$ | $X \cdot 1 = X$ | Identity Law |
-| 2.1.2 | $X + 1 = 1$ | $X \cdot 0 = 0$ | Null Law |
-| 2.1.3 | $X + X = X$ | $X \cdot X = X$ | Idempotent Law |
-| 2.1.4 | $X + \bar{X} = 1$ | $X \cdot \bar{X} = 0$ | Complement Law |
-| 2.1.5 | $\overline{\bar{X}} = X$ | — | Involution |
-
----
-
-### 2.2 Algebraic Laws
-
-| Law | OR Form | AND Form |
-| :--- | :--- | :--- |
-| **2.2.1 Commutative** | $X + Y = Y + X$ | $XY = YX$ |
-| **2.2.2 Associative** | $X + (Y + Z) = (X + Y) + Z$ | $X(YZ) = (XY)Z$ |
-| **2.2.3 Distributive** | $X(Y + Z) = XY + XZ$ | $X + YZ = (X + Y)(X + Z)$ |
+```math
+2^{40}=(10^6+d)^2
+=
+10^{12}+2(10^6)d+d^2
+```
 
 ---
 
-### 2.3 DeMorgan’s Theorems
-* **2.3.1 Theorem 1:** $\overline{X + Y} = \bar{X} \cdot \bar{Y}$
-* **2.3.2 Theorem 2:** $\overline{X \cdot Y} = \bar{X} + \bar{Y}$
+## 2. Decimal-to-Base Conversion
+
+### 2.1 Integer Conversion by Successive Division
+
+To convert a decimal integer into base `r`:
+
+1. Divide the decimal integer by the target base `r`.
+2. Record the remainder.
+3. The first remainder is the **LSD**.
+4. Repeat using the integer quotient.
+5. Stop when the quotient becomes `0`.
+6. Read the remainders from bottom to top.
+7. The last remainder is the **MSD**.
+
+```math
+\text{first remainder}=\text{LSD}
+```
+
+```math
+\text{last remainder}=\text{MSD}
+```
+
+📘 Examples:
+
+- [Decimal to binary example](./examples.md#21-decimal-to-binary-example)
+- [Decimal to octal example](./examples.md#22-decimal-to-octal-example)
+- [Decimal to hexadecimal example](./examples.md#23-decimal-to-hexadecimal-example)
 
 ---
 
-### 2.4 Duality Principle
-An equation remains valid if:
-1. All **OR** ($+$) operators are replaced by **AND** ($\cdot$).
-2. All **AND** ($\cdot$) operators are replaced by **OR** ($+$).
-3. All **0**s are replaced by **1**s and vice-versa.
+### 2.2 Fraction Conversion by Successive Multiplication
+
+To convert a decimal fraction into base `r`:
+
+1. Multiply the decimal fraction by the target base `r`.
+2. Record the integer part.
+3. The first integer part is the **MSD after the radix point**.
+4. Repeat using only the remaining fractional part.
+5. Stop when the fractional part is `0`, or when required precision is reached.
+6. Read the integer parts in order from top to bottom.
+
+General form:
+
+```math
+0.x_{10}
+\rightarrow
+0.a_1a_2a_3\dots{}_r
+```
+
+where `a_1` is obtained first.
 
 ---
 
-### 2.5 Consensus Theorem
-Allows removal of redundant terms covered by two other terms.
+### 2.3 General Positional Formula
 
-* **2.5.1 SOP Form:** $XY + \bar{X}Z + YZ = XY + \bar{X}Z$
-* **2.5.2 POS Form (Dual):** $(X + Y)(\bar{X} + Z)(Y + Z) = (X + Y)(\bar{X} + Z)$
+For a number `N` with integer and fractional parts in base `r`:
 
----
+```math
+N
+=
+\sum_{i=0}^{n} d_i r^i
++
+\sum_{j=1}^{m} a_{-j}r^{-j}
+```
 
-### 2.6 Boolean Expression Terminology
-* **Literal:** Single variable in normal ($A$) or complemented ($\bar{A}$) form.
-* **Product Term:** Literals connected by AND (e.g., $AB$).
-* **Sum Term:** Literals connected by OR (e.g., $A+B$).
-* **Sum of Products (SOP):** Product terms ORed together.
-* **Product of Sums (POS):** Sum terms ANDed together.
+where:
 
----
-
-### 2.7 Minterms and Maxterms
-Every truth table row is mapped to a specific Minterm ($m_j$) and Maxterm ($M_j$).
-
-* **Subscript ($j$):** The decimal equivalent of the binary input row (e.g., row $ABC=101$ is subscript $5$).
-* **Minterm ($m_j$):** Product term that equals **1** for its row. (Binary $0 \to \bar{X}$, $1 \to X$).
-* **Maxterm ($M_j$):** Sum term that equals **0** for its row. (Binary $0 \to X$, $1 \to \bar{X}$).
-* **Relationship:** $\bar{m_j} = M_j$
-
-
+- `d_i` are the integer-part digits
+- `a_{-j}` are the fractional-part digits
+- `r` is the base
 
 ---
 
-### 2.8 Function Complement ($\bar{F}$)
-Two methods to find the complement of a function:
+## 3. Fast Conversion Between Binary, Octal and Hex
 
-1. **DeMorgan’s:** Interchange AND/OR operators and complement every literal.
-2. **Duality Shortcut:** Find the Dual ($+\leftrightarrow \cdot$ and $0 \leftrightarrow 1$) then complement every literal.
+### 3.1 Binary to Octal
 
-| Feature | Duality | Complement ($\bar{F}$) |
-| :--- | :--- | :--- |
-| **Operators** | $+\leftrightarrow \cdot$ | $+\leftrightarrow \cdot$ |
-| **Constants** | $0 \leftrightarrow 1$ | $0 \leftrightarrow 1$ |
-| **Literals** | No Change | $X \leftrightarrow \bar{X}$ |
+Group binary bits in groups of 3 from the right.
 
----
+```math
+\text{1 octal digit}=3\text{ binary bits}
+```
 
-### 2.9 Implicants
-
-* **Implicant:** Any product term (grouping of 1s) where the function is **1**.
-* **Prime Implicant (PI):** The largest possible grouping of 1s; cannot be further expanded.
-* **Essential Prime Implicant (EPI):** A PI covering at least one '1' not covered by any other PI. **Mandatory** for the final expression.
-* **Redundant PI:** A PI whose 1s are already entirely covered by EPIs. **Discarded** during minimization.
-
-
-
-| Term | K-Map Visual | Requirement |
-| :--- | :--- | :--- |
-| **PI** | Max-sized circle | Candidate |
-| **EPI** | Only circle for a specific '1' | **Mandatory** |
-| **Redundant** | Overlaps existing EPIs | **Exclude** |
+📘 Example: [Binary to octal example](./examples.md#31-binary-to-octal-example)
 
 ---
 
-### 2.10 Complement POS
-The complement of a function in POS form ($\bar{F}$) uses the Maxterms ($M_j$) of the rows where the original function $F$ is **1**.
+### 3.2 Binary to Hexadecimal
 
-* **Rule:** If $F = \sum m(1, 4, 6)$, then $\bar{F} = \prod M(1, 4, 6)$.
-* **Logic:** Each Maxterm $M_j$ is the complement of the Minterm $m_j$ ($\bar{m_j} = M_j$).
+Group binary bits in groups of 4 from the right.
 
-| Form | Indices Used |
-| :--- | :--- |
-| **$F$ (SOP)** | Rows where output is **1** |
-| **$\bar{F}$ (POS)** | Rows where output is **1** |
+```math
+\text{1 hexadecimal digit}=4\text{ binary bits}
+```
+
+📘 Example: [Binary to hexadecimal example](./examples.md#32-binary-to-hexadecimal-example)
+
+---
+
+### 3.3 Padding Zeros
+
+If the leftmost group does not have enough bits, add leading zeros.
+
+Leading zeros do not change the value.
+
+📘 Example: [Padding zeros example](./examples.md#33-padding-zeros-example)
+
+---
+
+## 4. Two's Complement Representation
+
+### 4.1 Sign Bit in an `n`-bit System
+
+For signed two's complement numbers:
+
+- **MSB = 0** means positive or zero
+- **MSB = 1** means negative
+
+---
+
+### 4.2 Unsigned Range
+
+For an `n`-bit unsigned number:
+
+```math
+0 \le x \le 2^n-1
+```
+
+---
+
+### 4.3 Signed Two's Complement Range
+
+For an `n`-bit signed two's complement number:
+
+```math
+-2^{n-1} \le x \le 2^{n-1}-1
+```
+
+For 8-bit signed two's complement:
+
+```math
+-128 \le x \le 127
+```
+
+---
+
+### 4.4 Forming a Negative Number
+
+To compute `-B` in an `n`-bit two's complement system:
+
+1. Invert all bits.
+2. Add `1`.
+
+Mathematical identity:
+
+```math
+-B=2^n-B
+```
+
+within an `n`-bit system.
+
+📘 Example: [Two's complement negative number example](./examples.md#41-forming-a-negative-number-example)
+
+---
+
+## 5. Signed and Unsigned Binary
+
+### 5.1 Unsigned Binary
+
+Unsigned binary only represents non-negative numbers.
+
+For an `n`-bit unsigned number:
+
+```math
+0 \le x \le 2^n-1
+```
+
+All bits are used as value bits.
+
+Example for 4-bit unsigned:
+
+| Binary | Decimal |
+|---:|---:|
+| `0000` | 0 |
+| `0001` | 1 |
+| `0111` | 7 |
+| `1111` | 15 |
+
+So in unsigned binary:
+
+```math
+1111_2=15_{10}
+```
+
+---
+
+### 5.2 Signed Binary Using Two's Complement
+
+Signed binary can represent both positive and negative numbers.
+
+In an `n`-bit two's complement system:
+
+```math
+-2^{n-1} \le x \le 2^{n-1}-1
+```
+
+The most significant bit is the sign bit:
+
+- `MSB = 0` means non-negative
+- `MSB = 1` means negative
+
+Example for 4-bit signed two's complement:
+
+```math
+-8 \le x \le 7
+```
+
+| Binary | Signed decimal |
+|---:|---:|
+| `0000` | 0 |
+| `0001` | 1 |
+| `0111` | 7 |
+| `1000` | -8 |
+| `1101` | -3 |
+| `1111` | -1 |
+
+For 4-bit signed two's complement:
+
+```math
+b_3b_2b_1b_0
+```
+
+has value:
+
+```math
+-8b_3+4b_2+2b_1+b_0
+```
+
+Example:
+
+```math
+1101_2=-8+4+0+1=-3
+```
+
+---
+
+### 5.3 Minimum Number of Signed Bits
+
+To represent a positive number `x` in signed two's complement, choose the smallest `n` such that:
+
+```math
+2^{n-1}-1 \ge x
+```
+
+Example: to represent `+7`.
+
+For 3-bit signed two's complement:
+
+```math
+-4 \le x \le 3
+```
+
+So 3 bits cannot represent `+7`.
+
+For 4-bit signed two's complement:
+
+```math
+-8 \le x \le 7
+```
+
+So 4 bits is the minimum signed width for `+7`.
+
+---
+
+### 5.4 Sign Extension
+
+When increasing the bit width of a signed two's complement number, use sign extension.
+
+Rule:
+
+> Copy the original sign bit into the new higher bits.
+
+For a positive number, the sign bit is `0`, so extend with `0`s:
+
+```math
+0111 \rightarrow 00000111
+```
+
+For a negative number, the sign bit is `1`, so extend with `1`s:
+
+```math
+1101 \rightarrow 11111101
+```
+
+This preserves the numerical value.
+
+---
+
+### 5.5 Same Bit Pattern, Different Interpretation
+
+The same bit pattern can represent different values depending on whether it is interpreted as unsigned or signed.
+
+Example:
+
+```math
+1101_2
+```
+
+As 4-bit unsigned:
+
+```math
+1101_2=13_{10}
+```
+
+As 4-bit signed two's complement:
+
+```math
+1101_2=-8+4+0+1=-3
+```
+
+Therefore:
+
+| Bit pattern | Unsigned value | Signed two's complement value |
+|---:|---:|---:|
+| `1101` | 13 | -3 |
+
+Always check whether the binary number is signed or unsigned.
+
+---
+
+## 6. Subtraction Using Two's Complement
+
+Instead of directly computing:
+
+```math
+A-B
+```
+
+the CPU computes:
+
+```math
+A+(-B)
+```
+
+To find `-B` in an `n`-bit two's complement system:
+
+1. write `B` in `n` bits
+2. invert all bits
+3. add `1`
+
+Mathematical identity:
+
+```math
+-B=2^n-B
+```
+
+within an `n`-bit system.
+
+The hardware performs:
+
+```math
+A-B
+\equiv
+A+(2^n-B)
+\pmod{2^n}
+```
+
+Any carry out beyond the fixed bit width is discarded.
+
+📘 Example: [Signed subtraction using minimum bits](./examples.md#81-signed-subtraction-using-minimum-bits-example)
+
+📘 Example: [Signed subtraction using 8 bits](./examples.md#82-signed-subtraction-using-8-bits-example)
+
+---
+
+## 7. Modular Arithmetic
+
+Computers store integers within fixed bounds.
+
+For an `n`-bit system:
+
+```math
+0 \le x \le 2^n-1
+```
+
+All arithmetic is performed modulo:
+
+```math
+2^n
+```
+
+Values wrap around once they exceed the available bit range.
+
+📘 Example: [Modulo wrap-around example](./examples.md#61-modulo-wrap-around-example)
+
+---
+
+## 8. Overflow
+
+Overflow occurs when the true result is outside the representable signed range.
+
+For signed two's complement addition:
+
+- positive + positive giving negative means overflow
+- negative + negative giving positive means overflow
+- different signs cannot overflow
+
+📘 Examples:
+
+- [4-bit overflow example](./examples.md#71-4-bit-overflow-example)
+- [Clock analogy for modular arithmetic](./examples.md#72-clock-analogy)
