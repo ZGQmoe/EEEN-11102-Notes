@@ -1,122 +1,358 @@
-## Number Systems and Binary Arithmetic
+# Number Systems and Binary Arithmetic
+
+This file contains only core concepts, rules, and formulas.
+
+For worked examples and detailed explanations, see:
+
+➡️ [Number Systems Examples](./examples.md)
 
 ---
 
 ## 1. Number Systems
 
 ### 1.1 Binary (Base 2)
-* **Digits:** 0, 1
-* **Weights:** $2^n$
+
+**Digits:** `0, 1`
+
+**Base:** 2
+
+**Weights:**
+
+$$
+2^n
+$$
+
+A binary number is weighted by powers of 2:
+
+$$
+(b_n b_{n-1}\dots b_1 b_0)_2
+=
+b_n2^n+b_{n-1}2^{n-1}+\dots+b_1 2^1+b_0 2^0
+$$
+
+📘 Example: [Binary positional weight example](./examples.md#11-binary-positional-weight-example)
 
 ---
 
 ### 1.2 Octal (Base 8)
-* **Digits:** 0–7
-* **Weights:** $8^n$
-* **Binary to Octal:** Group bits in 3s.
-* **Example:** $(110101)_2 = (65)_8$
+
+**Digits:** `0–7`
+
+**Base:** 8
+
+**Weights:**
+
+$$
+8^n
+$$
+
+Binary to octal conversion:
+
+> Group binary bits in groups of 3 from the right.
+
+📘 Example: [Binary to octal example](./examples.md#12-binary-to-octal-example)
 
 ---
 
 ### 1.3 Hexadecimal (Base 16)
-* **Digits:** 0–9, A–F
-* **Weights:** $16^n$
-* **Binary to Hex:** Group bits in 4s.
+
+**Digits:** `0–9, A–F`
+
+**Base:** 16
+
+**Weights:**
+
+$$
+16^n
+$$
+
+Hexadecimal digit values:
+
+| Hex | Decimal |
+|---:|---:|
+| A | 10 |
+| B | 11 |
+| C | 12 |
+| D | 13 |
+| E | 14 |
+| F | 15 |
+
+Binary to hexadecimal conversion:
+
+> Group binary bits in groups of 4 from the right.
+
+📘 Example: [Binary to hexadecimal example](./examples.md#13-binary-to-hexadecimal-example)
 
 ---
 
-### 1.4 Binary Prefixes (K, M, G, T)
-In hardware design, prefixes represent powers of $2^{10}$ ($1024$).
+### 1.4 Binary Prefixes
+
+In hardware design, binary prefixes often represent powers of:
+
+$$
+2^{10}=1024
+$$
 
 | Prefix | Symbol | Binary Power | Decimal Approx. | Exact Value |
 | :--- | :--- | :--- | :--- | :--- |
-| **Kilo** | K | $2^{10}$ | $10^3$ | $1,024$ |
-| **Mega** | M | $2^{20}$ | $10^6$ | $1,048,576$ |
-| **Giga** | G | $2^{30}$ | $10^9$ | $1,073,741,824$ |
-| **Tera** | T | $2^{40}$ | $10^{12}$ | $1,099,511,627,776$ |
+| Kilo | K | $2^{10}$ | $10^3$ | $1,024$ |
+| Mega | M | $2^{20}$ | $10^6$ | $1,048,576$ |
+| Giga | G | $2^{30}$ | $10^9$ | $1,073,741,824$ |
+| Tera | T | $2^{40}$ | $10^{12}$ | $1,099,511,627,776$ |
 
+Useful identity:
 
+$$
+2^{20}=10^6+d
+$$
 
-**Exact Calculation Identity:**
-$$2^{20} = 10^6 + d \quad \text{where } d = 48,576$$
-$$2^{40} = (10^6 + d)^2 = 10^{12} + 2(10^6)d + d^2$$
+where:
 
----
+$$
+d=48,576
+$$
 
-## 2. Decimal-to-Base $r$ Conversion
+Then:
 
-### 2.1 Successive Division Procedure (Integers)
-1. **Divide** decimal integer by target base $r$.
-2. **Record remainder** (First remainder = **LSD**).
-3. **Repeat** using integer quotient until quotient is **0**.
-4. **Result:** Read remainders in reverse order (Last remainder = **MSD**).
-
----
-
-### 2.2 Successive Multiplication Procedure (Fractions)
-1. **Multiply** decimal fraction by target base $r$.
-2. **Record integer part** (First integer = **MSD**).
-3. **Repeat** using only the remaining fractional part.
-4. **Stop** when fractional part is **0** or precision is reached.
-5. **Result:** Read integers in order (top-to-bottom) after the radix point.
+$$
+2^{40}=(10^6+d)^2
+=
+10^{12}+2(10^6)d+d^2
+$$
 
 ---
 
-### 2.3 General Formula
-For a number $N$ with integer and fractional parts in base $r$:
-$$N = \sum_{i=0}^{n} (d_i r^i) + \sum_{j=1}^{m} (a_{-j} r^{-j})$$
+## 2. Decimal-to-Base Conversion
 
-Where:
-* $d_i$ are remainders from division (Integer part).
-* $a_{-j}$ are integers from multiplication (Fractional part).
+### 2.1 Integer Conversion by Successive Division
 
----
+To convert a decimal integer into base \(r\):
 
-## 3. Two's Complement Representation
+1. Divide the decimal integer by the target base \(r\).
+2. Record the remainder.
+3. The first remainder is the **LSD**.
+4. Repeat using the integer quotient.
+5. Stop when the quotient becomes \(0\).
+6. Read the remainders from bottom to top.
+7. The last remainder is the **MSD**.
 
-### 3.1 Sign Bit ($n$-bit system)
-* **MSB = 0** → Positive
-* **MSB = 1** → Negative
+$$
+\text{first remainder}=\text{LSD}
+$$
 
----
+$$
+\text{last remainder}=\text{MSD}
+$$
 
-### 3.2 Ranges
-* **Unsigned:** $0 \le x \le 2^n - 1$
-* **Signed (2's Complement):** $-2^{n-1} \le x \le 2^{n-1}-1$
-* **Example (8-bit):** $[-128, 127]$
+📘 Examples:
 
----
-
-### 3.3 Forming a Negative Number
-To compute $-B$:
-1. **Invert** bits (NOT operation).
-2. **Add 1** to the result.
-
-**Mathematical Identity:**
-$$-B = 2^n - B$$
+- [Decimal to binary example](./examples.md#21-decimal-to-binary-example)
+- [Decimal to octal example](./examples.md#22-decimal-to-octal-example)
+- [Decimal to hexadecimal example](./examples.md#23-decimal-to-hexadecimal-example)
 
 ---
 
-## 4. Subtraction Using Two's Complement
-Instead of $A - B$, the CPU computes $A + (-B)$.  
-Since $-B = 2^n - B$, the hardware performs:
-$$A - B \equiv A + (2^n - B) \pmod{2^n}$$
+### 2.2 Fraction Conversion by Successive Multiplication
+
+To convert a decimal fraction into base \(r\):
+
+1. Multiply the decimal fraction by the target base \(r\).
+2. Record the integer part.
+3. The first integer part is the **MSD after the radix point**.
+4. Repeat using only the remaining fractional part.
+5. Stop when the fractional part is \(0\), or when required precision is reached.
+6. Read the integer parts in order from top to bottom.
+
+General form:
+
+$$
+0.x_{10}
+\rightarrow
+0.a_1a_2a_3\dots{}_r
+$$
+
+where \(a_1\) is obtained first.
 
 ---
 
-## 5. Modular Arithmetic
-Computers store integers within fixed bounds: $0 \le x \le 2^n - 1$. All arithmetic is performed $\pmod{2^n}$.
+### 2.3 General Positional Formula
+
+For a number \(N\) with integer and fractional parts in base \(r\):
+
+$$
+N
+=
+\sum_{i=0}^{n} d_i r^i
++
+\sum_{j=1}^{m} a_{-j}r^{-j}
+$$
+
+where:
+
+- \(d_i\) are the integer-part digits
+- \(a_{-j}\) are the fractional-part digits
+- \(r\) is the base
 
 ---
 
-### 5.1 Overflow
-Overflow occurs when the result exceeds the representable signed range, causing the value to "wrap" into an incorrect sign.
+## 3. Fast Conversion Between Binary, Octal and Hex
 
-**Clock Analogy ($\pmod{12}$):**
-* $18 \equiv 6 \pmod{12}$ (18:00 is effectively 6:00).
-* Since $12 \equiv 0 \pmod{12}$, the number "wraps" once capacity is reached.
+### 3.1 Binary to Octal
 
-**Example (4-bit):**
-* $7 + 3 = 10 \rightarrow (1010_2)$.
-* Signed range is $[-8, 7]$. 
-* Since $10 > 7$, the result wraps to a negative value (-3).
+Group binary bits in groups of 3 from the right.
+
+$$
+\text{1 octal digit}=3\text{ binary bits}
+$$
+
+📘 Example: [Binary to octal example](./examples.md#31-binary-to-octal-example)
+
+---
+
+### 3.2 Binary to Hexadecimal
+
+Group binary bits in groups of 4 from the right.
+
+$$
+\text{1 hexadecimal digit}=4\text{ binary bits}
+$$
+
+📘 Example: [Binary to hexadecimal example](./examples.md#32-binary-to-hexadecimal-example)
+
+---
+
+### 3.3 Padding Zeros
+
+If the leftmost group does not have enough bits, add leading zeros.
+
+Leading zeros do not change the value.
+
+📘 Example: [Padding zeros example](./examples.md#33-padding-zeros-example)
+
+---
+
+## 4. Two's Complement Representation
+
+### 4.1 Sign Bit in an \(n\)-bit System
+
+For signed two's complement numbers:
+
+- **MSB = 0** means positive or zero
+- **MSB = 1** means negative
+
+---
+
+### 4.2 Unsigned Range
+
+For an \(n\)-bit unsigned number:
+
+$$
+0 \le x \le 2^n-1
+$$
+
+---
+
+### 4.3 Signed Two's Complement Range
+
+For an \(n\)-bit signed two's complement number:
+
+$$
+-2^{n-1} \le x \le 2^{n-1}-1
+$$
+
+For 8-bit signed two's complement:
+
+$$
+-128 \le x \le 127
+$$
+
+---
+
+### 4.4 Forming a Negative Number
+
+To compute \(-B\) in an \(n\)-bit two's complement system:
+
+1. Invert all bits.
+2. Add \(1\).
+
+Mathematical identity:
+
+$$
+-B=2^n-B
+$$
+
+within an \(n\)-bit system.
+
+📘 Example: [Two's complement negative number example](./examples.md#41-forming-a-negative-number-example)
+
+---
+
+## 5. Subtraction Using Two's Complement
+
+Instead of directly computing:
+
+$$
+A-B
+$$
+
+the CPU computes:
+
+$$
+A+(-B)
+$$
+
+Since:
+
+$$
+-B=2^n-B
+$$
+
+the hardware performs:
+
+$$
+A-B
+\equiv
+A+(2^n-B)
+\pmod{2^n}
+$$
+
+📘 Example: [Subtraction using two's complement example](./examples.md#51-subtraction-using-twos-complement-example)
+
+---
+
+## 6. Modular Arithmetic
+
+Computers store integers within fixed bounds.
+
+For an \(n\)-bit system:
+
+$$
+0 \le x \le 2^n-1
+$$
+
+All arithmetic is performed modulo:
+
+$$
+2^n
+$$
+
+Values wrap around once they exceed the available bit range.
+
+📘 Example: [Modulo wrap-around example](./examples.md#61-modulo-wrap-around-example)
+
+---
+
+## 7. Overflow
+
+Overflow occurs when the true result is outside the representable signed range.
+
+For signed two's complement addition:
+
+- positive + positive giving negative means overflow
+- negative + negative giving positive means overflow
+- different signs cannot overflow
+
+📘 Examples:
+
+- [4-bit overflow example](./examples.md#71-4-bit-overflow-example)
+- [Clock analogy for modular arithmetic](./examples.md#72-clock-analogy)
